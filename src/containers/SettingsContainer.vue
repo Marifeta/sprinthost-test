@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import Topic from "../components/Topic";
+import Topic from "../components/TopicItem";
 import GhostButton from "../components/GhostButton";
 import LinkButton from "../components/LinkButton";
 export default {
@@ -56,6 +56,6 @@ export default {
       margin-bottom: 12px
     &__image-topic
       flex-wrap: wrap-reverse
-      justify-content: end
+      justify-content: flex-end
 
 </style>

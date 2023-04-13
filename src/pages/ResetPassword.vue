@@ -16,8 +16,8 @@
 <script>
 import MainHeader from "../containers/MainHeader";
 import PasswordForm from "../containers/PasswordForm";
-import Settings from "../containers/Settings";
-import Modal from "../components/Modal";
+import Settings from "../containers/SettingsContainer";
+import Modal from "../components/ModalWindow";
 export default {
   components: {Modal, Settings, PasswordForm, MainHeader},
   data() {

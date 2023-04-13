@@ -69,7 +69,7 @@ export default {
     min-width: 240px
     display: flex
     flex-direction: column
-    align-items: end
+    align-items: flex-end
   &__button
     font-style: normal
     font-weight: 700
@@ -100,7 +100,7 @@ export default {
 @media (max-width: 736px)
   .modal
     &__content
-      align-items: start
+      align-items: flex-start
       padding: 32px
       border-radius: 0
       width: 100%

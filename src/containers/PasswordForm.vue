@@ -27,7 +27,7 @@
       <PrimaryButton
           :is-disabled="isDisabledButton"
           :text="'Сменить пароль'"
-          @click.native="sendPassword"
+          :on-click="sendPassword"
       >
         Сменить пароль
       </PrimaryButton>
@@ -43,8 +43,8 @@
 <script>
 import PrimaryInput from "../components/PrimaryInput";
 import PrimaryButton from "../components/PrimaryButton";
-import Note from "../components/Note";
-import Checkbox from "../components/Checkbox";
+import Note from "../components/NoteItem";
+import Checkbox from "../components/CheckboxItem";
 import { InvalidReason } from '../helper/invalidReason';
 import { delay } from '../helper/delay';
 import ErrorInput from "../components/ErrorInput";
@@ -92,6 +92,7 @@ export default {
           return;
         }
         await delay(2000);
+        // также в настоящий запрос добавляем значение checkbox
         this.$emit('viewResult', true);
       } catch (e) {
         this.$emit('viewResult', false);
@@ -123,7 +124,7 @@ export default {
   &__content
     flex-grow: 1
   &__note
-    justify-self: end
+    justify-self: flex-end
   &__input
     margin-bottom: 30px
   &__checkbox

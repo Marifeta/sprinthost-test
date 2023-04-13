@@ -1,5 +1,6 @@
 <template>
   <button
+      @click="onClick"
       class="button"
       :class="{
         'button_disabled': isDisabled
@@ -17,6 +18,10 @@ export default {
     },
     text: {
       type: String,
+      required: true,
+    },
+    onClick: {
+      type: Function,
       required: true,
     },
   },
