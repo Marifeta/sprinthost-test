@@ -6,19 +6,14 @@
         class="form__input"
         :title="'Новый пароль'"
         :placeholder="'Введите новый пароль'"
+        :error="invalidErrors.passwordError"
       />
       <PrimaryInput
           v-model="repeatedPassword"
           :title="'Повторите новый пароль'"
           :placeholder="'Повторите новый пароль'"
+          :error="invalidErrors.repeatedPasswordError"
       />
-      <transition name="fade-away-text">
-        <ErrorInput
-            v-if="error"
-            :key="error.description"
-            :text="error.description"
-        />
-      </transition>
       <Checkbox
           v-model="checked"
           class="form__checkbox"
@@ -47,10 +42,8 @@ import Note from "../components/NoteItem";
 import Checkbox from "../components/CheckboxItem";
 import { InvalidReason } from '../helper/invalidReason';
 import { delay } from '../helper/delay';
-import ErrorInput from "../components/ErrorInput";
 export default {
   components: {
-    ErrorInput,
     Checkbox,
     Note,
     PrimaryButton,
@@ -61,39 +54,58 @@ export default {
       password: '',
       repeatedPassword: '',
       checked: false,
-      error: '',
+      invalidErrors: {
+        passwordError: null,
+        repeatedPasswordError: null,
+      },
       isDisabledButton: false,
     };
   },
   methods: {
-    validatePassword() {
-      if (this.password.trim().length === 0 || this.repeatedPassword.trim().length === 0) {
+    validatePassword(password) {
+      if (password.trim().length === 0) {
         return InvalidReason.Empty;
       }
-      if (this.password !== this.repeatedPassword) {
-        return InvalidReason.Miss;
-      }
-      if (this.password.length < 8) {
+
+      if (password.length < 8) {
         return InvalidReason.Length;
       }
       const regexp = /[а-яА-Я\s]/i;
-      if (regexp.test(this.password)) {
+      if (regexp.test(password)) {
         return InvalidReason.Reg;
       }
       return null;
     },
+    comparePasswords(pass, otherPass) {
+      if (pass !== otherPass) {
+        return InvalidReason.Miss;
+      }
+      return null;
+    },
+    clearErrors() {
+      for (let err in this.invalidErrors)  {
+        this.invalidErrors[err] = null;
+      }
+    },
+    clearInputs() {
+      this.password = '';
+      this.repeatedPassword = '';
+    },
     async sendPassword() {
-      this.error = null;
+      this.clearErrors()
       this.isDisabledButton = true;
+      const isComparing = this.comparePasswords(this.password, this.repeatedPassword)
       try {
-        const error = this.validatePassword();
-        if (error) {
-          this.error = error;
+        this.invalidErrors.passwordError = this.validatePassword(this.password) || isComparing;
+        this.invalidErrors.repeatedPasswordError = this.validatePassword(this.repeatedPassword) || isComparing;
+
+        if (this.invalidErrors.passwordError || this.invalidErrors.repeatedPasswordError) {
           return;
         }
         await delay(2000);
         // также в настоящий запрос добавляем значение checkbox
         this.$emit('viewResult', true);
+        this.clearInputs();
       } catch (e) {
         this.$emit('viewResult', false);
         console.log('error', e);
@@ -106,16 +118,6 @@ export default {
 </script>
 
 <style scoped lang="sass">
-
-.fade-away-text-enter-active
-  animation: fade-away-text .4s linear
-.fade-away-text-leave-active
-  opacity: 0
-@keyframes fade-away-text
-  from
-    opacity: 0
-  to
-    opacity: 1
 
 .form
   display: flex

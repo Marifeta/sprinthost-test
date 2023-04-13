@@ -6,11 +6,13 @@
         @viewResult="openModal"
     />
     <Settings class="page__settings" />
-    <Modal
-        v-if="isOpenModal"
-        :message="message"
-        @closeModal="closeModal"
-    />
+    <transition name="fade">
+      <Modal
+          v-if="isOpenModal"
+          :message="message"
+          @closeModal="closeModal"
+      />
+    </transition>
   </div>
 </template>
 <script>
@@ -40,6 +42,15 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.fade-enter-active
+  animation: fade .2s linear
+.fade-leave-active
+  opacity: 0
+@keyframes fade
+  from
+    opacity: 0
+  to
+    opacity: 1
 .page
   margin: 0 auto
   width: 680px

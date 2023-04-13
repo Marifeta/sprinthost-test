@@ -24,9 +24,10 @@ export default {
 <style scoped lang="sass">
 .note
   width: 240px
-  border: 1px solid $information_border
+  // border: 1px solid $information_border
+  box-shadow: 0 0 0 1px $information_border
   border-radius: 8px
-  padding: 16px
+  padding: 16px 26px 16px 16px
   &__icon
     height: 40px
     width: 40px

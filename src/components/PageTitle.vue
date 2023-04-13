@@ -23,7 +23,7 @@ export default {
     font-weight: 700
     font-size: 26px
     line-height: 28px
-    margin-bottom: 16px
+    margin-bottom: 14px
     color: $page_title
   &__line
     width: 100%

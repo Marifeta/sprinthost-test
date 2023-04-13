@@ -48,6 +48,7 @@ export default {
   &__image-topic
     display: flex
     gap: 24px 99px
+    align-items: flex-end
 @media (max-width: 736px)
   .settings
     &__topic

@@ -29,7 +29,6 @@ export default {
 .button
   height: 40px
   min-height: 40px
-  width: 100%
   max-width: 252px
   border-radius: 4px
   font-style: normal

@@ -63,7 +63,7 @@ export default {
       min-width: 20px
       box-shadow: 0 0 0 1.6px $checkbox_border
       transition: background-color 200ms ease
-      margin-right: 14px
+      margin-right: 16px
       border-radius: 2px
     &:hover+label:before
       background-color: $checkbox_border

@@ -16,11 +16,20 @@
           @blur="isFocused = false"
       >
     </label>
+    <transition name="fade-away-text">
+      <ErrorInput
+          v-if="error"
+          :key="error.description"
+          :text="error.description"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
+import ErrorInput from "./ErrorInput";
 export default {
+  components: {ErrorInput},
   props: {
     title: {
       type: String,
@@ -33,6 +42,10 @@ export default {
     value: {
       type: String,
       required: true,
+    },
+    error: {
+      type: Symbol,
+      required: false
     },
   },
   data() {
@@ -54,6 +67,15 @@ export default {
 </script>
 
 <style scoped lang="sass">
+.fade-away-text-enter-active
+  animation: fade-away-text .4s linear
+.fade-away-text-leave-active
+  opacity: 0
+@keyframes fade-away-text
+  from
+    opacity: 0
+  to
+    opacity: 1
 ::placeholder
   font-style: normal
   font-weight: 400
