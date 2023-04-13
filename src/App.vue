@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ResetPassword />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ResetPassword from "./pages/ResetPassword";
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ResetPassword,
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap')
+
+*
+  box-sizing: border-box
+  border: none
+  padding: 0
+  margin: 0
+  font-family: 'Open Sans', sans-serif
+  outline-color: #b8b8b8
+li
+  list-style-type: none
+#app
+  position: relative
+  font-family: Avenir, Helvetica, Arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  color: #2c3e50
+  @include global_desktop_padding
+@media (max-width: 736px)
+  #app
+    @include global_mobile_padding
 </style>
